@@ -59,6 +59,43 @@ public final class GreeterGrpc {
      }
      return getSayHelloMethod;
   }
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  @Deprecated // Use {@link #getSayHelloAgainMethod()} instead.
+  public static final io.grpc.MethodDescriptor<HelloRequest,
+      HelloReply> METHOD_SAY_HELLO_AGAIN = getSayHelloAgainMethodHelper();
+
+  private static volatile io.grpc.MethodDescriptor<HelloRequest,
+      HelloReply> getSayHelloAgainMethod;
+
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static io.grpc.MethodDescriptor<HelloRequest,
+      HelloReply> getSayHelloAgainMethod() {
+    return getSayHelloAgainMethodHelper();
+  }
+
+  private static io.grpc.MethodDescriptor<HelloRequest,
+      HelloReply> getSayHelloAgainMethodHelper() {
+    io.grpc.MethodDescriptor<HelloRequest, HelloReply> getSayHelloAgainMethod;
+    if ((getSayHelloAgainMethod = GreeterGrpc.getSayHelloAgainMethod) == null) {
+      synchronized (GreeterGrpc.class) {
+        if ((getSayHelloAgainMethod = GreeterGrpc.getSayHelloAgainMethod) == null) {
+          GreeterGrpc.getSayHelloAgainMethod = getSayHelloAgainMethod =
+              io.grpc.MethodDescriptor.<HelloRequest, HelloReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "helloworld.Greeter", "SayHelloAgain"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  HelloRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  HelloReply.getDefaultInstance()))
+                  .setSchemaDescriptor(new GreeterMethodDescriptorSupplier("SayHelloAgain"))
+                  .build();
+          }
+        }
+     }
+     return getSayHelloAgainMethod;
+  }
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -100,6 +137,16 @@ public final class GreeterGrpc {
       asyncUnimplementedUnaryCall(getSayHelloMethodHelper(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Sends another greeting
+     * </pre>
+     */
+    public void sayHelloAgain(HelloRequest request,
+        io.grpc.stub.StreamObserver<HelloReply> responseObserver) {
+      asyncUnimplementedUnaryCall(getSayHelloAgainMethodHelper(), responseObserver);
+    }
+
     @Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -109,6 +156,13 @@ public final class GreeterGrpc {
                 HelloRequest,
                 HelloReply>(
                   this, METHODID_SAY_HELLO)))
+          .addMethod(
+            getSayHelloAgainMethodHelper(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                HelloRequest,
+                HelloReply>(
+                  this, METHODID_SAY_HELLO_AGAIN)))
           .build();
     }
   }
@@ -144,6 +198,17 @@ public final class GreeterGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSayHelloMethodHelper(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Sends another greeting
+     * </pre>
+     */
+    public void sayHelloAgain(HelloRequest request,
+        io.grpc.stub.StreamObserver<HelloReply> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSayHelloAgainMethodHelper(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -175,6 +240,16 @@ public final class GreeterGrpc {
     public HelloReply sayHello(HelloRequest request) {
       return blockingUnaryCall(
           getChannel(), getSayHelloMethodHelper(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Sends another greeting
+     * </pre>
+     */
+    public HelloReply sayHelloAgain(HelloRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getSayHelloAgainMethodHelper(), getCallOptions(), request);
     }
   }
 
@@ -209,9 +284,21 @@ public final class GreeterGrpc {
       return futureUnaryCall(
           getChannel().newCall(getSayHelloMethodHelper(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Sends another greeting
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<HelloReply> sayHelloAgain(
+        HelloRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSayHelloAgainMethodHelper(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_SAY_HELLO = 0;
+  private static final int METHODID_SAY_HELLO_AGAIN = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -232,6 +319,10 @@ public final class GreeterGrpc {
       switch (methodId) {
         case METHODID_SAY_HELLO:
           serviceImpl.sayHello((HelloRequest) request,
+              (io.grpc.stub.StreamObserver<HelloReply>) responseObserver);
+          break;
+        case METHODID_SAY_HELLO_AGAIN:
+          serviceImpl.sayHelloAgain((HelloRequest) request,
               (io.grpc.stub.StreamObserver<HelloReply>) responseObserver);
           break;
         default:
@@ -296,6 +387,7 @@ public final class GreeterGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new GreeterFileDescriptorSupplier())
               .addMethod(getSayHelloMethodHelper())
+              .addMethod(getSayHelloAgainMethodHelper())
               .build();
         }
       }

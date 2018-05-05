@@ -35,10 +35,12 @@ public final class HelloWorldProtoHello {
     String[] descriptorData = {
       "\n\020helloworld.proto\022\nhelloworld\"\034\n\014HelloR" +
       "equest\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017\n\007me" +
-      "ssage\030\001 \001(\t2I\n\007Greeter\022>\n\010SayHello\022\030.hel" +
-      "loworld.HelloRequest\032\026.helloworld.HelloR" +
-      "eply\"\000B8\n\030com.javaman.grpc.exampleB\024Hell" +
-      "oWorldProtoHelloP\001\242\002\003HLWb\006proto3"
+      "ssage\030\001 \001(\t2\216\001\n\007Greeter\022>\n\010SayHello\022\030.he" +
+      "lloworld.HelloRequest\032\026.helloworld.Hello" +
+      "Reply\"\000\022C\n\rSayHelloAgain\022\030.helloworld.He" +
+      "lloRequest\032\026.helloworld.HelloReply\"\000B8\n\030" +
+      "com.javaman.grpc.exampleB\024HelloWorldProt" +
+      "oHelloP\001\242\002\003HLWb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
