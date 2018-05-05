@@ -1,4 +1,4 @@
-package com.javaman.grpc.example;
+package com.javaman.grpc.example.proto;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncUnaryCall;

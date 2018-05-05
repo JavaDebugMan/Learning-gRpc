@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package client;
+package com.javaman.grpc.example.client;
 
-import com.javaman.grpc.example.GreeterGrpc;
-import com.javaman.grpc.example.HelloReply;
-import com.javaman.grpc.example.HelloRequest;
+import com.javaman.grpc.example.proto.GreeterGrpc;
+import com.javaman.grpc.example.proto.HelloReply;
+import com.javaman.grpc.example.proto.HelloRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
